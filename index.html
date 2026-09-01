@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Virtual Chemistry Lab — Simple Distillation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">⚗</span>
+    <div>
+      <strong>Virtual Chemistry Lab</strong>
+      <small>NCERT Exp: Separation by Simple Distillation (Acetone + Water)</small>
+    </div>
+  </div>
+  <div class="mode-switch" role="group" aria-label="Lab mode">
+    <button class="mode active" data-mode="free">Free Lab</button>
+    <button class="mode" data-mode="guided">Guided / Help</button>
+    <button class="mode" data-mode="demo">Demonstration</button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="lab-wrap">
+    <div class="lab-head">
+      <div>
+        <span class="eyebrow">EXPERIMENT 15.1 · NCERT</span>
+        <h1>Separation of Miscible Liquids by Simple Distillation</h1>
+        <p>Follow standard laboratory apparatus arrangement: assemble, seal, cool, heat, and collect distillate.</p>
+      </div>
+      <div class="status-chip" id="statusChip" aria-live="polite">Setup incomplete</div>
+    </div>
+
+    <!-- Interactive Laboratory Bench with NCERT Fig 15.1 Vector Apparatus -->
+    <div id="lab" class="lab" aria-label="Interactive laboratory bench">
+      <svg class="lab-canvas" viewBox="0 0 960 540" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <!-- Laboratory Lighting & Glass Gradients -->
+          <linearGradient id="benchWall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="65%" stop-color="#f0f7f9"/>
+            <stop offset="100%" stop-color="#e2edf0"/>
+          </linearGradient>
+
+          <linearGradient id="benchTop" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#cbd5e1"/>
+            <stop offset="25%" stop-color="#94a3b8"/>
+            <stop offset="100%" stop-color="#64748b"/>
+          </linearGradient>
+
+          <linearGradient id="glassGradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="rgba(255, 255, 255, 0.75)"/>
+            <stop offset="40%" stop-color="rgba(224, 242, 254, 0.4)"/>
+            <stop offset="100%" stop-color="rgba(186, 230, 253, 0.25)"/>
+          </linearGradient>
+
+          <linearGradient id="liquidGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#7dd3fc"/>
+            <stop offset="100%" stop-color="#38bdf8"/>
+          </linearGradient>
+
+          <linearGradient id="metalRod" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#475569"/>
+            <stop offset="45%" stop-color="#cbd5e1"/>
+            <stop offset="70%" stop-color="#f1f5f9"/>
+            <stop offset="100%" stop-color="#334155"/>
+          </linearGradient>
+
+          <linearGradient id="flameGrad" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#0284c7" stop-opacity="0.9"/>
+            <stop offset="25%" stop-color="#38bdf8"/>
+            <stop offset="60%" stop-color="#fbbf24"/>
+            <stop offset="90%" stop-color="#ef4444"/>
+          </linearGradient>
+
+          <!-- Cork Pattern -->
+          <pattern id="corkPat" width="8" height="8" patternUnits="userSpaceOnUse">
+            <rect width="8" height="8" fill="#a77a4a"/>
+            <rect width="4" height="8" fill="#bf905f"/>
+            <line x1="0" y1="4" x2="8" y2="4" stroke="#845729" stroke-width="0.5"/>
+          </pattern>
+
+          <!-- Gauze Mesh Pattern -->
+          <pattern id="wireMesh" width="4" height="4" patternUnits="userSpaceOnUse">
+            <rect width="4" height="4" fill="none" stroke="#475569" stroke-width="0.8"/>
+          </pattern>
+
+          <!-- Drop Shadow Filter -->
+          <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.15"/>
+          </filter>
+        </defs>
+
+        <!-- 1. Background & Workbench -->
+        <rect x="0" y="0" width="960" height="410" fill="url(#benchWall)"/>
+        <!-- Workbench Grid lines -->
+        <g stroke="rgba(148, 163, 184, 0.12)" stroke-width="1">
+          <line x1="0" y1="100" x2="960" y2="100"/>
+          <line x1="0" y1="200" x2="960" y2="200"/>
+          <line x1="0" y1="300" x2="960" y2="300"/>
+          <line x1="0" y1="400" x2="960" y2="400"/>
+        </g>
+        <!-- Bench surface (Y = 410 to 540) -->
+        <rect x="0" y="410" width="960" height="130" fill="url(#benchTop)"/>
+        <line x1="0" y1="410" x2="960" y2="410" stroke="#475569" stroke-width="3"/>
+        <text x="30" y="515" fill="#334155" font-size="11" font-weight="700" letter-spacing="1.5">NCERT FIG. 15.1 · LABORATORY APPARATUS FOR DISTILLATION</text>
+
+        <!-- 2. LEFT STAND (Distillation Flask Stand) -->
+        <g id="stand" class="apparatus-group target" data-target="stand">
+          <!-- Stand Base on Table -->
+          <path d="M 60 410 L 100 375 L 230 375 L 200 410 Z" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+          <rect x="60" y="410" width="140" height="14" rx="2" fill="#64748b" stroke="#334155" stroke-width="2"/>
+          <!-- Vertical Rod -->
+          <rect x="135" y="70" width="10" height="320" rx="5" fill="url(#metalRod)" stroke="#334155" stroke-width="1.5"/>
+          <text x="110" y="60" font-size="11" font-weight="600" fill="#475569">Clamp stand</text>
+        </g>
+
+        <!-- 3. HEATING APPARATUS: Bunsen Burner, Tripod, Gauze -->
+        <!-- Bunsen Burner -->
+        <g id="burner" class="apparatus-group target" data-target="burner">
+          <!-- Base -->
+          <ellipse cx="270" cy="410" rx="35" ry="8" fill="#334155" stroke="#1e293b" stroke-width="2"/>
+          <!-- Body Column -->
+          <rect x="264" y="340" width="12" height="66" fill="url(#metalRod)" stroke="#334155" stroke-width="1.5"/>
+          <!-- Gas Hose Collar -->
+          <circle cx="270" cy="385" r="8" fill="#64748b"/>
+          <path d="M 276 385 Q 310 400 330 430" fill="none" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+          <!-- Flame (Dynamic) -->
+          <path id="flame" d="M 270 340 C 255 330 260 290 270 270 C 280 290 285 330 270 340 Z" fill="url(#flameGrad)" filter="url(#softShadow)"/>
+          <text x="270" y="435" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Burner</text>
+        </g>
+
+        <!-- Tripod Stand -->
+        <g id="tripod" class="apparatus-group target" data-target="tripod">
+          <!-- 3 Legs -->
+          <line x1="225" y1="410" x2="242" y2="305" stroke="#334155" stroke-width="5" stroke-linecap="round"/>
+          <line x1="315" y1="410" x2="298" y2="305" stroke="#334155" stroke-width="5" stroke-linecap="round"/>
+          <line x1="270" y1="410" x2="270" y2="305" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+          <!-- Top Ring -->
+          <ellipse cx="270" cy="305" rx="42" ry="7" fill="none" stroke="#1e293b" stroke-width="5"/>
+          <text x="220" y="375" font-size="11" font-weight="600" fill="#475569">Tripod stand</text>
+        </g>
+
+        <!-- Wire Gauze -->
+        <g id="gauze" class="apparatus-group target" data-target="gauze">
+          <!-- Gauze Plate -->
+          <rect x="222" y="299" width="96" height="6" rx="2" fill="url(#wireMesh)" stroke="#334155" stroke-width="1.5"/>
+          <!-- Ceramic Center Pad -->
+          <ellipse cx="270" cy="301" rx="24" ry="3" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="270" y="292" text-anchor="middle" font-size="10" font-weight="600" fill="#64748b">Wire gauze</text>
+        </g>
+
+        <!-- 4. DISTILLATION FLASK & CLAMP -->
+        <!-- Lower Clamp on Left Stand (Holding flask neck) -->
+        <g id="clamp" class="apparatus-group target" data-target="clamp">
+          <!-- Clamp Boss Head -->
+          <rect x="131" y="165" width="18" height="16" rx="3" fill="#334155" stroke="#1e293b" stroke-width="1"/>
+          <circle cx="126" cy="173" r="4" fill="#94a3b8"/>
+          <!-- Clamp Arm -->
+          <path d="M 148 173 L 252 173" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+          <!-- Jaws around flask neck -->
+          <path d="M 252 163 C 258 163 262 168 262 173 C 262 178 258 183 252 183" fill="none" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 288 163 C 282 163 278 168 278 173 C 278 178 282 183 288 183" fill="none" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+          <text x="180" y="162" font-size="11" font-weight="600" fill="#475569">Clamp</text>
+        </g>
+
+        <!-- Distillation Flask (Round Bottom Flask with Side Arm) -->
+        <g id="flask" class="apparatus-group target" data-target="flask">
+          <!-- Liquid Solution in Flask Bulb -->
+          <path id="liquid" d="M 224 250 C 224 290 244 300 270 300 C 296 300 316 290 316 250 C 300 247 240 247 224 250 Z" fill="url(#liquidGradient)" opacity="0.85"/>
+          <!-- Boiling Bubbles inside liquid -->
+          <g id="flaskBubbles">
+            <circle cx="255" cy="275" r="3" class="bubble"/>
+            <circle cx="280" cy="285" r="2.5" class="bubble" style="animation-delay: 0.5s;"/>
+            <circle cx="265" cy="265" r="3.5" class="bubble" style="animation-delay: 0.9s;"/>
+            <circle cx="290" cy="270" r="2" class="bubble" style="animation-delay: 1.3s;"/>
+          </g>
+
+          <!-- Glass Body (Bulb + Neck) -->
+          <path d="
+            M 260 140
+            H 280
+            V 180
+            L 282 195
+            C 318 208 322 250 318 275
+            C 310 305 230 305 222 275
+            C 218 250 222 208 258 195
+            L 260 180
+            Z"
+            fill="url(#glassGradient)" stroke="#334155" stroke-width="3" filter="url(#softShadow)"/>
+
+          <!-- Side Arm (Angled down ~25° from neck into condenser) -->
+          <path d="M 280 185 L 360 222" fill="none" stroke="#334155" stroke-width="8" stroke-linecap="round"/>
+          <path d="M 280 185 L 360 222" fill="none" stroke="rgba(224, 242, 254, 0.9)" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- Annotations & Labels -->
+          <text x="160" y="235" font-size="11" font-weight="600" fill="#334155">Distillation</text>
+          <text x="160" y="248" font-size="11" font-weight="600" fill="#334155">flask</text>
+          <line x1="205" y1="240" x2="235" y2="255" stroke="#64748b" stroke-width="1.2"/>
+
+          <text x="330" y="325" font-size="11" font-weight="600" fill="#0369a1">Solution of acetone</text>
+          <text x="330" y="338" font-size="11" font-weight="600" fill="#0369a1">and water</text>
+          <line x1="325" y1="328" x2="295" y2="280" stroke="#0284c7" stroke-width="1.2"/>
+        </g>
+
+        <!-- 5. CORKS & THERMOMETER -->
+        <!-- Main Cork on Flask Mouth -->
+        <g id="cork" class="apparatus-group target" data-target="cork">
+          <rect x="257" y="132" width="26" height="18" rx="2" fill="url(#corkPat)" stroke="#845729" stroke-width="1.5"/>
+          <text x="300" y="138" font-size="11" font-weight="600" fill="#475569">Cork</text>
+          <line x1="295" y1="135" x2="284" y2="138" stroke="#64748b" stroke-width="1.2"/>
+
+          <!-- Second Cork (Side-arm to Condenser joint) -->
+          <g transform="rotate(25, 345, 215)">
+            <rect x="335" y="206" width="20" height="16" rx="2" fill="url(#corkPat)" stroke="#845729" stroke-width="1.5"/>
+          </g>
+          <text x="345" y="195" font-size="11" font-weight="600" fill="#475569">Cork</text>
+          <line x1="355" y1="200" x2="355" y2="212" stroke="#64748b" stroke-width="1.2"/>
+        </g>
+
+        <!-- Thermometer (-10 °C to 110 °C) -->
+        <g id="thermometer" class="apparatus-group target" data-target="thermometer">
+          <!-- Glass Stem -->
+          <rect x="268" y="45" width="4" height="142" rx="2" fill="#ffffff" stroke="#475569" stroke-width="1.2"/>
+          <!-- Mercury / Red Alcohol thread -->
+          <line x1="270" y1="48" x2="270" y2="185" stroke="#dc2626" stroke-width="1.5"/>
+          <!-- Thermometer Bulb (Positioned level with side arm!) -->
+          <circle cx="270" cy="186" r="3.5" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+          <!-- Upper clamp holding thermometer on stand -->
+          <rect x="131" y="90" width="18" height="14" rx="2" fill="#334155"/>
+          <path d="M 148 97 L 266 97" stroke="#475569" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="268" cy="97" r="3" fill="#1e293b"/>
+          <!-- Live Temp Badge -->
+          <g transform="translate(285, 60)">
+            <rect width="60" height="22" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" filter="url(#softShadow)"/>
+            <text x="30" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="#dc2626" id="tempRead">24 °C</text>
+          </g>
+          <text x="270" y="35" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Thermometer</text>
+        </g>
+
+        <!-- 6. RIGHT STAND (Condenser Support Stand) -->
+        <g id="stand2" class="apparatus-group">
+          <!-- Stand Base on Table -->
+          <path d="M 480 410 L 520 375 L 640 375 L 610 410 Z" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+          <rect x="480" y="410" width="130" height="14" rx="2" fill="#64748b" stroke="#334155" stroke-width="2"/>
+          <!-- Vertical Rod -->
+          <rect x="545" y="70" width="10" height="320" rx="5" fill="url(#metalRod)" stroke="#334155" stroke-width="1.5"/>
+          <!-- Clamp holding Condenser -->
+          <rect x="541" y="270" width="18" height="16" rx="3" fill="#334155"/>
+          <path d="M 545 278 L 500 278" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+          <path d="M 500 266 C 494 272 494 284 500 290" fill="none" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+          <text x="560" y="265" font-size="11" font-weight="600" fill="#475569">Clamp</text>
+        </g>
+
+        <!-- 7. WATER CONDENSER (Liebig Condenser) -->
+        <g id="condenser" class="apparatus-group target" data-target="condenser">
+          <!-- Angled Condenser Group (25° slope from side-arm to beaker) -->
+          <g transform="rotate(24.5, 360, 222)">
+            <!-- Outer Glass Jacket (Cooling Water Jacket) -->
+            <rect x="370" y="200" width="260" height="44" rx="22" fill="url(#glassGradient)" stroke="#334155" stroke-width="3" filter="url(#softShadow)"/>
+            
+            <!-- Inner Glass Delivery Tube (passes vapor and distillate) -->
+            <rect x="350" y="217" width="390" height="10" rx="2" fill="rgba(255,255,255,0.85)" stroke="#334155" stroke-width="2"/>
+            
+            <!-- Animated Cooling Water Streams inside Jacket -->
+            <line x1="390" y1="210" x2="610" y2="210" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" class="water-flow-stream"/>
+            <line x1="390" y1="234" x2="610" y2="234" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" class="water-flow-stream"/>
+
+            <!-- Vapor Drift Dots inside inner tube -->
+            <circle cx="370" cy="222" r="2.5" class="vapour-dot"/>
+            <circle cx="430" cy="222" r="2.5" class="vapour-dot" style="animation-delay: 0.6s;"/>
+            <circle cx="510" cy="222" r="2.5" class="vapour-dot" style="animation-delay: 1.2s;"/>
+
+            <!-- Water Ports -->
+            <!-- Hot Water OUT (Top Nozzle at upper end) -->
+            <rect x="400" y="184" width="12" height="18" rx="2" fill="#e2e8f0" stroke="#334155" stroke-width="2"/>
+            <!-- Cold Water IN (Bottom Nozzle at lower end) -->
+            <rect x="590" y="242" width="12" height="18" rx="2" fill="#e2e8f0" stroke="#334155" stroke-width="2"/>
+          </g>
+
+          <!-- Hot Water Out Annotation with Arrow -->
+          <g transform="translate(420, 160)">
+            <text x="0" y="0" font-size="11" font-weight="600" fill="#334155">Hot</text>
+            <text x="0" y="13" font-size="11" font-weight="600" fill="#334155">water out</text>
+            <path d="M 22 25 L 34 10 M 34 10 L 26 10 M 34 10 L 34 18" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+
+          <!-- Cold Water In Annotation with Arrow -->
+          <g transform="translate(580, 365)">
+            <text x="0" y="18" font-size="11" font-weight="600" fill="#0284c7">Cold water in</text>
+            <path d="M 40 4 L 48 -10 M 48 -10 L 40 -10 M 48 -10 L 48 -2" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+
+          <text x="615" y="292" font-size="11" font-weight="600" fill="#334155">Water condenser</text>
+          <line x1="610" y1="289" x2="565" y2="292" stroke="#64748b" stroke-width="1.2"/>
+        </g>
+
+        <!-- 8. RECEIVING BEAKER -->
+        <g id="beaker" class="apparatus-group target" data-target="beaker">
+          <!-- Beaker Glassware -->
+          <path d="
+            M 650 350
+            L 660 410
+            Q 660 420 670 420
+            H 740
+            Q 750 420 750 410
+            L 760 350
+            Z"
+            fill="url(#glassGradient)" stroke="#334155" stroke-width="3" filter="url(#softShadow)"/>
+          <ellipse cx="705" cy="350" rx="55" ry="6" fill="rgba(255,255,255,0.7)" stroke="#334155" stroke-width="2.5"/>
+
+          <!-- Distillate Liquid Collected -->
+          <path id="distillateLiquid" d="M 660 410 H 750 V 415 Q 750 420 740 420 H 670 Q 660 420 660 415 Z" fill="#7dd3fc" opacity="0.85"/>
+
+          <!-- Falling Droplets from condenser tip into beaker -->
+          <g id="condenserDrips">
+            <ellipse cx="705" cy="358" rx="2" ry="3.5" class="drip-drop"/>
+            <ellipse cx="705" cy="358" rx="2" ry="3.5" class="drip-drop" style="animation-delay: 0.6s;"/>
+          </g>
+
+          <text x="705" y="445" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Receiving beaker</text>
+        </g>
+      </svg>
+
+      <!-- Floating Readout Badges -->
+      <div class="floating-readout">
+        <div><span>Vapour Temp</span><strong id="tempBig">24 °C</strong></div>
+        <div><span>Distillate</span><strong><span id="volume">0</span> mL</strong></div>
+      </div>
+
+      <div class="bench-note" id="labMessage" aria-live="polite">Drag equipment from the tray onto the correct highlighted position.</div>
+    </div>
+
+    <!-- Progress Card -->
+    <div class="progress-card">
+      <div class="progress-title">
+        <strong>Experiment Progress</strong>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-track"><div id="progressBar"></div></div>
+      <div class="steps" id="steps"></div>
+    </div>
+  </section>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <section class="panel equipment">
+      <div class="panel-title"><span>Equipment tray</span><small>Drag tools to place</small></div>
+      <div class="tray" id="tray"></div>
+    </section>
+
+    <section class="panel controls">
+      <div class="panel-title">Experiment controls</div>
+      <div class="control-grid">
+        <button id="ignite" class="primary">🔥 Ignite burner</button>
+        <label class="slider-label">Flame intensity <output id="heatOut">0%</output><input id="heat" type="range" min="0" max="100" value="0"></label>
+        <button id="cooling">Start cooling water</button>
+        <button id="fixSetup">Auto-align setup (Fig 15.1)</button>
+        <div class="demo-controls hidden" id="demoControls" aria-live="polite">
+          <div class="demo-title">
+            <span>🎬 Demo Player</span>
+            <small id="demoStepLabel">Ready (0/9)</small>
+          </div>
+          <div class="demo-actions">
+            <button id="demoPlay" class="primary" title="Play automatic step-by-step demonstration">▶ Play Auto</button>
+            <button id="demoStop" class="quiet" title="Stop and reset demo step">⏹ Stop</button>
+            <button id="demoNext" title="Advance to next step manually">⏭ Next Step</button>
+          </div>
+        </div>
+        <button id="reset" class="quiet">Reset experiment</button>
+      </div>
+    </section>
+
+    <section class="panel notebook">
+      <div class="panel-title">Observation notebook</div>
+      <label>Component I boiling temp <input id="obsT1" type="number" min="0" max="120" placeholder="°C (e.g. 56)"></label>
+      <label>Component I name <input id="obsN1" placeholder="Name (e.g. Acetone)"></label>
+      <label>Component II boiling temp <input id="obsT2" type="number" min="0" max="120" placeholder="°C (e.g. 100)"></label>
+      <label>Component II name <input id="obsN2" placeholder="Name (e.g. Water)"></label>
+      <label>Distillate collected <input id="obsV" type="number" min="0" placeholder="mL"></label>
+      <label>Notes <textarea id="obsNotes" placeholder="Record what you observed..."></textarea></label>
+      <button id="checkObs" class="primary">Check observations</button>
+      <div id="obsFeedback" class="feedback" aria-live="polite"></div>
+    </section>
+
+    <section class="panel help">
+      <div class="panel-title">Help & Guidance</div>
+      <div id="helpText">The help system is contextual. Ask for a hint without giving up control of the experiment.</div>
+      <div class="help-actions"><button id="hint">Hint</button><button id="next">Show next step</button><button id="why">Why?</button></div>
+      <button id="procedure" class="link-button">Show complete procedure</button>
+      <div id="procedureText" class="procedure hidden"></div>
+    </section>
+
+    <section class="panel learn">
+      <details><summary style="cursor:pointer;font-weight:600;font-size:13px;color:var(--text-main)">Learn more & Theory</summary>
+        <div class="learn-content">
+          <b>Aim</b><p>To separate a mixture of two miscible liquids (acetone and water) by simple distillation.</p>
+          <b>Theory</b><p>The separation of two miscible liquids having at least a difference of 25 K in their boiling points can be separated by simple distillation. Acetone (BP: ~56 °C) evaporates first and faster than water (BP: 100 °C).</p>
+          <b>Key Observations</b><p>Acetone vapour rises, is cooled in the condenser, and collects in the receiving beaker. The liquid remaining in the flask is water.</p>
+        </div>
+      </details>
+    </section>
+  </aside>
+</main>
+
+<div class="modal hidden" id="modal">
+  <div class="modal-card">
+    <button class="modal-x" id="modalX">×</button>
+    <h2 id="modalTitle"></h2>
+    <div id="modalBody"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
